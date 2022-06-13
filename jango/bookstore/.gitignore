@@ -1,1 +1,5 @@
 venv/* 
+books/migrations/*
+books/__pycache__/*
+bookstore/__pycache__/*
+db.sqlite3/*
