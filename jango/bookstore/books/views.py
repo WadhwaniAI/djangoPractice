@@ -10,12 +10,12 @@ def index(request):
 
 def show(request, id):
     singeBook = get_object_or_404(Book, pk=id)
-    review = Review.objects.order_by('-created_at')
-    context = {'books': singeBook, 'reviews':review} 
+    review = Review.objects.filter(book_id=id).order_by('-created_at')
+    context = {'book': singeBook, 'reviews':review} 
     return render(request, 'books/show.html', context) 
 
-def review(request):
+def review(request, id):
     body = request.POST['review']
-    Review(body=body).save()
-    return redirect('/book')
+    Review(body=body, book_id=id).save()
+    return redirect('/book') 
     
