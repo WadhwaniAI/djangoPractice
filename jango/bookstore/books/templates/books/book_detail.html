@@ -20,8 +20,18 @@
     </form>
 
     <div class="review">
+      <h3>Review</h3>
       {% for review in reviews %}
       <p>{{review.body}}</p>
       {% endfor %}
+    </div>
+
+    <div class="author">
+      <h3>Authors</h3>
+      <p>
+        {% for author in authors %}
+          {{author.name}}, 
+        {% endfor %}
+      </p>
     </div>
 {% endblock  %}

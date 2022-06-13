@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView
 #Create your views here.
 def index(request):
     dbData = Book.objects.all()
-    context = {'books': dbData}
+    context = {'books': dbData}  
     return render(request, 'books/book_list.html', context)
 
 class BookDetailView(DetailView):
@@ -15,6 +15,7 @@ class BookDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['reviews'] = context['book'].review_set.order_by('-created_at')
+        context['authors'] = context['book'].author.all()
         return context
         
     pass
@@ -34,4 +35,4 @@ def review(request, id):
     body = request.POST['review']
     Review(body=body, book_id=id).save()
     return redirect('/book') 
-    
+     
