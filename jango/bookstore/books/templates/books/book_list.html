@@ -1,18 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
-{% block title %}
-  {{books.title}}
-{% endblock title %}
+{% block title %} Bookstore - Books {% endblock%} 
+
+
+{% block nav_title %}
+Programming Books
+{% endblock nav_title %}
+  
 
 {% block content %}
-    <h1>Programming Books</h1>
+<div>
 
-    <div class="author">
-      <h3>Books List</h3>
-      <div>
-        {% for book in books %}
-          <p>{{ book.title}}</p>
-          <img src="{{ book.thumbnail_url}} " width="200"/>
-        {% endfor %}
-      </div >
-  {% endblock  %}
+
+<div class="grid grid-cols-4 gap-4 mt-10">
+  {% for book in book_list %}
+  <a
+    href="{% url 'book.show' book.id %}"
+    class="justify-self-center text-center my-4"
+    target="_blank"
+  >
+    <div class="flex justify-center">
+      <img src="{{book.image.url}}" width="200" />
+    </div>
+    <p class="text-lg text-gray-700">{{ book.title }}</p>
+  </a>
+  {% endfor %}
+</div>
+</div>
+{% endblock %}
