@@ -28,10 +28,10 @@
 
     <div class="author">
       <h3>Authors</h3>
-      <p>
+      <div>
         {% for author in authors %}
-          {{author.name}}, 
+          <a  href="{% url 'author.book' author.name %}">{{author.name}}</a>, 
         {% endfor %}
-      </p>
+      </div >
     </div>
 {% endblock  %}

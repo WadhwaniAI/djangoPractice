@@ -7,10 +7,12 @@
 {% block content %}
     <h1>Programming Books</h1>
 
-    <a href="/book/{{books.id}}" target="_blank">
-      <div class=''>
-        <img src="{{ books.thumbnail_url }}" />
-      </div>
-      <p>sadsa</p>
-    </a>
+    <div class="author">
+      <h3>Books List</h3>
+      <div>
+        {% for book in books %}
+          <p>{{ book.title}}</p>
+          <img src="{{ book.thumbnail_url}} " width="200"/>
+        {% endfor %}
+      </div >
   {% endblock  %}

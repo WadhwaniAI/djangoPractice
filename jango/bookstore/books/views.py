@@ -35,4 +35,8 @@ def review(request, id):
     body = request.POST['review']
     Review(body=body, book_id=id).save()
     return redirect('/book') 
-     
+
+def author(request, author):
+    books = Book.objects.filter(author__name=author)
+    context = {'books': books}
+    return render(request, 'books/book_list.html', context)
