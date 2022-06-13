@@ -13,9 +13,9 @@
       <h3> Title <h3>
     </div>
 
-    <form method="POST">
+    <form method="POST" action="{% url 'book.review' %}">
       {% csrf_token %}
-        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <textarea name="review" id="" cols="30" rows="10"></textarea>
 
         <button type="submit">Submit</button>
     </form>
