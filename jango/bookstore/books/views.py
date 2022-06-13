@@ -1,5 +1,4 @@
-from http.client import HTTPResponse
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import redirect
 from books.models import Book, Review
 from django.views.generic import ListView, DetailView
 
@@ -13,6 +12,12 @@ class BookListView(ListView):
 class BookDetailView(DetailView):
 #     review = Review.objects.filter(book_id=id).order_by('-created_at')
     model = Book
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['reviews'] = context['book'].review_set.order_by('-created_at')
+        return context
+        
     pass
 
 
@@ -21,7 +26,7 @@ class BookDetailView(DetailView):
 #     context = {'books': dbData}
 #     return render(request, 'books/index.html', context)
 
-# def show(request, id):
+# def show(request, id): 
 #     singeBook = get_object_or_404(Book, pk=id)
 #     review = Review.objects.filter(book_id=id).order_by('-created_at')
 #     context = {'book': singeBook, 'reviews':review} 
