@@ -8,3 +8,6 @@ class Book(models.Model):
     thumbnail_url = models.CharField(max_length=256, null=True)
     short_desc = models.CharField(max_length=256, null=True)
     long_desc = models.TextField(null=True)
+    
+class Review(models.Model):
+    body = models.TextField()

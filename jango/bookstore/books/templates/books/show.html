@@ -12,5 +12,12 @@
     <div class="grid">
       <h3> Title <h3>
     </div>
+
+    <form method="POST">
+      {% csrf_token %}
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
   </body>
 </html>
