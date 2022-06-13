@@ -19,5 +19,11 @@
 
         <button type="submit">Submit</button>
     </form>
+
+    <div class="review">
+      {% for review in reviews %}
+      <p>{{review.body}}</p>
+      {% endfor %}
+    </div>
   </body>
 </html>

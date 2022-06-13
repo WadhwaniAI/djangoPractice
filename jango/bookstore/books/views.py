@@ -10,7 +10,8 @@ def index(request):
 
 def show(request, id):
     singeBook = get_object_or_404(Book, pk=id)
-    context = {'books': singeBook} 
+    review = Review.objects.order_by('-created_at')
+    context = {'books': singeBook, 'reviews':review} 
     return render(request, 'books/show.html', context) 
 
 def review(request):
