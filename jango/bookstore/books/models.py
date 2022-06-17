@@ -17,6 +17,7 @@ class Book(models.Model):
     short_desc = models.CharField(max_length=256, null=True)
     long_desc = models.TextField(null=True)
     author = models.ManyToManyField(Author)
+    image = models.ImageField(upload_to='images', null=True)
     
     def __str__(self):
         return f"{self.id} {self.title}"
