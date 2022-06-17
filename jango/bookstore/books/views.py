@@ -1,5 +1,6 @@
 from cgi import FieldStorage
 from django.shortcuts import redirect, render
+from books.form import ReviewForm
 from books.models import Book, Review
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -28,6 +29,7 @@ class BookDetailView(DetailView, LoginRequiredMixin):
         context = super().get_context_data(**kwargs)
         context['reviews'] = context['book'].review_set.order_by('-created_at')
         context['authors'] = context['book'].author.all()
+        context['form'] = ReviewForm()
         return context
  
 # def show(request, id): 
@@ -39,11 +41,14 @@ class BookDetailView(DetailView, LoginRequiredMixin):
 
 
 def review(request, id):
-    image = request.FILES['image']
-    fs = FileSystemStorage()
-    name = fs.save(image.name, image)
-    body = request.POST['review']
-    newReview = Review(body=body, book_id=id, image=fs.url(name))
+    body = request.POST['body']
+    newReview = Review(body=body, book_id=id, user=request.user)
+    
+    if len(request.FILES) != 0:
+        image = request.FILES['image']
+        fs = FileSystemStorage()
+        name = fs.save(image.name, image)
+        newReview.image = fs.url(name)
     newReview.save()
     return redirect('/book') 
 

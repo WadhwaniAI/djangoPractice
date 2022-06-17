@@ -44,12 +44,12 @@
           {% if user.is_authenticated %}
           <form method="POST" action="{% url 'book.review' book.id %}" enctype="multipart/form-data">
             {% csrf_token %}
+            {{form.as_p}}
             <button
               type="submit"
               class="float-right border rounded p-2 bg-gray-800 text-white">
               Submit
             </button>
-            <input type='file' name='image'/>
           </form>
           {% else %}
           <p>
