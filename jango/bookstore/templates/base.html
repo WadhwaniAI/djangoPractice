@@ -25,10 +25,15 @@
       <div class="flex justify-end">
         {% if user.is_authenticated %}
         <div>
-          <a href="/logout" class="p-2 rounded bg-gray-700 text-white">Logout</a>
+          <a href="{% url 'logout' %}" class="p-2 rounded bg-gray-700 text-white"> Logout </a>
         </div>
-        {% endif %}
+        {% else %}
+          <div>
+            <a href="{% url 'login' %}" class="p-2 rounded bg-white text-black"> Login </a>
+          </div>
+          {% endif %}
       </div>
+      
     </nav>
     <section class="py-10 flex justify-center">
       {% block content %}
