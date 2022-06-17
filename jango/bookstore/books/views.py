@@ -1,7 +1,9 @@
+from cgi import FieldStorage
 from django.shortcuts import redirect, render
 from books.models import Book, Review
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.files.storage import FileSystemStorage
 
 #Create your views here.
 # def index(request):
@@ -37,8 +39,12 @@ class BookDetailView(DetailView, LoginRequiredMixin):
 
 
 def review(request, id):
+    image = request.FILES['image']
+    fs = FileSystemStorage()
+    name = fs.save(image.name, image)
     body = request.POST['review']
-    Review(body=body, book_id=id).save()
+    newReview = Review(body=body, book_id=id, image=fs.url(name))
+    newReview.save()
     return redirect('/book') 
 
 def author(request, author):

@@ -44,13 +44,12 @@
           {% if user.is_authenticated %}
           <form method="POST" action="{% url 'book.review' book.id %}" enctype="multipart/form-data">
             {% csrf_token %}
-            {{form.as_p}}
             <button
               type="submit"
-              class="float-right border rounded p-2 bg-gray-800 text-white"
-            >
+              class="float-right border rounded p-2 bg-gray-800 text-white">
               Submit
             </button>
+            <input type='file' name='image'/>
           </form>
           {% else %}
           <p>
@@ -67,9 +66,7 @@
               <p class="text-gray-400">{{review.created_at}}</p>
             </div>
             <p>{{review.body}}</p>
-            {% if review.image %}
-            <img src="{{review.image.url}}" width="100" >
-            {% endif %}
+            <img src="{{review.image}}" width="100"/>
           </div>
           {% endfor %}
         </div>
